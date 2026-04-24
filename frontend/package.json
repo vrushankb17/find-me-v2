@@ -30,6 +30,12 @@
       "react-app/jest"
     ]
   },
+  "overrides": {
+    "react-simple-maps": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    }
+  },
   "browserslist": {
     "production": [
       ">0.2%",
