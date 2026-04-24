@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .routers import users, detect, admin
+from .routers import users, detect, admin, weather, chatbot
 
 from .database import connect_to_mongo, close_mongo_connection
 
@@ -26,6 +26,8 @@ app.add_middleware(
 app.include_router(users.router, prefix="/api/users", tags=["Users"])
 app.include_router(detect.router, prefix="/api/detect", tags=["Detection"])
 app.include_router(admin.router, prefix="/api/admin", tags=["Admin"])
+app.include_router(weather.router, prefix="/api/weather", tags=["Weather"])
+app.include_router(chatbot.router, prefix="/api/chatbot", tags=["Chatbot"])
 
 @app.get("/")
 def read_root():

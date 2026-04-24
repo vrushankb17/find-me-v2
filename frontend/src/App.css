@@ -459,6 +459,13 @@ tr:hover td {
   width: 100%;
 }
 
+.home-right-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
 /* Stats Card */
 .stats-card {
   background: rgba(15, 23, 42, 0.6);

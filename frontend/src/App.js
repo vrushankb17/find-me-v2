@@ -6,6 +6,8 @@ import { ShieldAlert, Search, Radar, CheckCircle2, UserPlus, Edit2, Trash2 } fro
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import IndiaMap from "./components/IndiaMap";
 import LiveTicker from "./components/LiveTicker";
+import WeatherWidget from "./components/WeatherWidget";
+import ChatBot from "./components/ChatBot";
 import CustomerRegister from "./pages/CustomerRegister";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -316,6 +318,8 @@ function App() {
         {/* EXTERNAL DASHBOARD */}
         {!isAdminTab && page === "home" && (
           <motion.div key="cust-home" initial="initial" animate="in" exit="out" variants={pageVariants} transition={pageTransition} className="home-layout">
+
+            {/* LEFT COLUMN */}
             <div className="home-left">
               <h1 className="title" style={{fontSize: "3.5rem", marginBottom: "8px"}}>FindMe</h1>
               <p className="subtitle" style={{fontSize: "1.1rem"}}>AI-Powered Person Identification System for Large Scale Events.</p>
@@ -324,104 +328,113 @@ function App() {
                 <button className="btn" onClick={() => setPage("register")}>
                   Enroll Person
                 </button>
-
                 <button className="btn secondary" onClick={() => window.open("/admin", "_blank")}>
                   Admin Login
                 </button>
               </div>
 
               <LiveTicker />
+
+              <div style={{marginTop: '24px', width: '100%'}}>
+                <WeatherWidget />
+              </div>
             </div>
 
+            {/* RIGHT COLUMN */}
             <div className="home-right">
-              <div style={{display: "flex", flexDirection: "column", gap: "24px", width: "100%"}}>
+              <div className="home-right-inner">
+
+                {/* Stats Card - aligned with LiveTicker */}
                 <div className="stats-card">
                   <h3 className="stats-title">Kumbh Mela Statistics</h3>
-                <div className="stats-grid">
-                  <div className="stat-box">
-                    <div style={{display: "flex", justifyContent: "center", marginBottom: "8px"}}>
-                      <Radar size={32} color="#f43f5e" />
+                  <div className="stats-grid">
+                    <div className="stat-box">
+                      <div style={{display: "flex", justifyContent: "center", marginBottom: "8px"}}>
+                        <Radar size={32} color="#f43f5e" />
+                      </div>
+                      <div className="stat-value highlight-red">420</div>
+                      <div className="stat-label">Currently Missing</div>
                     </div>
-                    <div className="stat-value highlight-red">420</div>
-                    <div className="stat-label">Currently Missing</div>
+                    <div className="stat-box">
+                      <div style={{display: "flex", justifyContent: "center", marginBottom: "8px"}}>
+                        <CheckCircle2 size={32} color="#10b981" />
+                      </div>
+                      <div className="stat-value highlight-green">1,350</div>
+                      <div className="stat-label">Successfully Reunited</div>
+                    </div>
                   </div>
-                  <div className="stat-box">
-                    <div style={{display: "flex", justifyContent: "center", marginBottom: "8px"}}>
-                      <CheckCircle2 size={32} color="#10b981" />
+
+                  <div className="charts-container">
+                    <div className="chart-wrapper">
+                      <ResponsiveContainer width="100%" height={160}>
+                        <PieChart>
+                          <defs>
+                            <linearGradient id="colorLost" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="5%" stopColor="#f43f5e" stopOpacity={1}/>
+                              <stop offset="95%" stopColor="#fb923c" stopOpacity={1}/>
+                            </linearGradient>
+                            <linearGradient id="colorFound" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="5%" stopColor="#10b981" stopOpacity={1}/>
+                              <stop offset="95%" stopColor="#06b6d4" stopOpacity={1}/>
+                            </linearGradient>
+                          </defs>
+                          <text x="50%" y="45%" textAnchor="middle" dominantBaseline="middle" fill="#fff" fontSize="24" fontWeight="bold">
+                            1,770
+                          </text>
+                          <text x="50%" y="58%" textAnchor="middle" dominantBaseline="middle" fill="#888" fontSize="12">
+                            Total Cases
+                          </text>
+                          <Pie
+                            data={pieData}
+                            cx="50%"
+                            cy="50%"
+                            innerRadius={55}
+                            outerRadius={70}
+                            dataKey="value"
+                            stroke="none"
+                            paddingAngle={5}
+                            cornerRadius={4}
+                          >
+                            <Cell key={`cell-0`} fill="url(#colorLost)" />
+                            <Cell key={`cell-1`} fill="url(#colorFound)" />
+                          </Pie>
+                          <Tooltip contentStyle={{ backgroundColor: '#111', border: '1px solid #333', borderRadius: '8px' }} itemStyle={{ color: '#fff' }} />
+                        </PieChart>
+                      </ResponsiveContainer>
+                      <div className="chart-label">Status Distribution</div>
                     </div>
-                    <div className="stat-value highlight-green">1,350</div>
-                    <div className="stat-label">Successfully Reunited</div>
+
+                    <div className="chart-wrapper">
+                      <ResponsiveContainer width="100%" height={160}>
+                        <BarChart data={barData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
+                          <defs>
+                            <linearGradient id="barColorLost" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="5%" stopColor="#f43f5e" stopOpacity={1}/>
+                              <stop offset="95%" stopColor="#fb923c" stopOpacity={1}/>
+                            </linearGradient>
+                            <linearGradient id="barColorFound" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="5%" stopColor="#10b981" stopOpacity={1}/>
+                              <stop offset="95%" stopColor="#06b6d4" stopOpacity={1}/>
+                            </linearGradient>
+                          </defs>
+                          <XAxis dataKey="name" tick={{fontSize: 10, fill: '#888'}} axisLine={false} tickLine={false} />
+                          <YAxis tick={{fontSize: 10, fill: '#888'}} axisLine={false} tickLine={false} />
+                          <Tooltip cursor={{fill: '#222'}} contentStyle={{ backgroundColor: '#111', border: '1px solid #333', borderRadius: '8px' }} />
+                          <Bar dataKey="lost" fill="url(#barColorLost)" radius={[5, 5, 0, 0]} barSize={12} />
+                          <Bar dataKey="found" fill="url(#barColorFound)" radius={[5, 5, 0, 0]} barSize={12} />
+                        </BarChart>
+                      </ResponsiveContainer>
+                      <div className="chart-label">Daily Cases (Lost vs Found)</div>
+                    </div>
                   </div>
                 </div>
 
-                <div className="charts-container">
-                  <div className="chart-wrapper">
-                    <ResponsiveContainer width="100%" height={160}>
-                      <PieChart>
-                        <defs>
-                          <linearGradient id="colorLost" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#f43f5e" stopOpacity={1}/>
-                            <stop offset="95%" stopColor="#fb923c" stopOpacity={1}/>
-                          </linearGradient>
-                          <linearGradient id="colorFound" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#10b981" stopOpacity={1}/>
-                            <stop offset="95%" stopColor="#06b6d4" stopOpacity={1}/>
-                          </linearGradient>
-                        </defs>
-                        <text x="50%" y="45%" textAnchor="middle" dominantBaseline="middle" fill="#fff" fontSize="24" fontWeight="bold">
-                          1,770
-                        </text>
-                        <text x="50%" y="58%" textAnchor="middle" dominantBaseline="middle" fill="#888" fontSize="12">
-                          Total Cases
-                        </text>
-                        <Pie
-                          data={pieData}
-                          cx="50%"
-                          cy="50%"
-                          innerRadius={55}
-                          outerRadius={70}
-                          dataKey="value"
-                          stroke="none"
-                          paddingAngle={5}
-                          cornerRadius={4}
-                        >
-                          <Cell key={`cell-0`} fill="url(#colorLost)" />
-                          <Cell key={`cell-1`} fill="url(#colorFound)" />
-                        </Pie>
-                        <Tooltip contentStyle={{ backgroundColor: '#111', border: '1px solid #333', borderRadius: '8px' }} itemStyle={{ color: '#fff' }} />
-                      </PieChart>
-                    </ResponsiveContainer>
-                    <div className="chart-label">Status Distribution</div>
-                  </div>
-                  
-                  <div className="chart-wrapper">
-                    <ResponsiveContainer width="100%" height={160}>
-                      <BarChart data={barData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
-                        <defs>
-                          <linearGradient id="barColorLost" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#f43f5e" stopOpacity={1}/>
-                            <stop offset="95%" stopColor="#fb923c" stopOpacity={1}/>
-                          </linearGradient>
-                          <linearGradient id="barColorFound" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#10b981" stopOpacity={1}/>
-                            <stop offset="95%" stopColor="#06b6d4" stopOpacity={1}/>
-                          </linearGradient>
-                        </defs>
-                        <XAxis dataKey="name" tick={{fontSize: 10, fill: '#888'}} axisLine={false} tickLine={false} />
-                        <YAxis tick={{fontSize: 10, fill: '#888'}} axisLine={false} tickLine={false} />
-                        <Tooltip cursor={{fill: '#222'}} contentStyle={{ backgroundColor: '#111', border: '1px solid #333', borderRadius: '8px' }} />
-                        <Bar dataKey="lost" fill="url(#barColorLost)" radius={[5, 5, 0, 0]} barSize={12} />
-                        <Bar dataKey="found" fill="url(#barColorFound)" radius={[5, 5, 0, 0]} barSize={12} />
-                      </BarChart>
-                    </ResponsiveContainer>
-                    <div className="chart-label">Daily Cases (Lost vs Found)</div>
-                  </div>
-                </div>
+                {/* India Map - below stats */}
+                <IndiaMap />
+
               </div>
+            </div>
 
-              <IndiaMap />
-            </div>
-            </div>
           </motion.div>
         )}
 
@@ -436,6 +449,7 @@ function App() {
         
         </AnimatePresence>
 
+        {!isAdminTab && <ChatBot />}
       </div>
     </div>
   );
