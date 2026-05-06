@@ -5,7 +5,7 @@ import { Activity, Users, Camera, LogOut } from 'lucide-react';
 const AdminDashboard = ({ setPage, fetchUsers, pageVariants, pageTransition }) => {
   return (
     <motion.div key="admin-dash" initial="initial" animate="in" exit="out" variants={pageVariants} transition={pageTransition} className="card">
-        <Activity size={32} color="#fff" style={{marginBottom: "16px"}} />
+        <Activity size={32} color="#ea580c" style={{marginBottom: "16px"}} />
         <h1 className="title">Dashboard</h1>
         <p className="subtitle">Welcome to the FindMe admin command center.</p>
         <div className="divider"></div>

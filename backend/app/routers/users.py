@@ -36,8 +36,17 @@ async def register_user(user: UserCreate):
         "city": user.city,
         "phone": user.phone,
         "aadhar_number": user.aadhar_number,
+        "emergency_contact_name": user.emergency_contact_name,
+        "emergency_contact_phone": user.emergency_contact_phone,
+        "blood_group": user.blood_group,
+        "height_cm": user.height_cm,
+        "weight_kg": user.weight_kg,
+        "allergies": user.allergies,
+        "chronic_conditions": user.chronic_conditions,
+        "current_medications": user.current_medications,
+        "past_surgeries": user.past_surgeries,
         "face_encoding": avg_encoding,
-        "all_encodings": encodings  # optional: store all 3 just in case
+        "all_encodings": encodings
     }
     
     result = await db.users.insert_one(user_doc)
@@ -50,7 +59,16 @@ async def register_user(user: UserCreate):
         gender=user.gender,
         city=user.city,
         phone=user.phone,
-        aadhar_number=user.aadhar_number
+        aadhar_number=user.aadhar_number,
+        emergency_contact_name=user.emergency_contact_name,
+        emergency_contact_phone=user.emergency_contact_phone,
+        blood_group=user.blood_group,
+        height_cm=user.height_cm,
+        weight_kg=user.weight_kg,
+        allergies=user.allergies,
+        chronic_conditions=user.chronic_conditions,
+        current_medications=user.current_medications,
+        past_surgeries=user.past_surgeries
     )
 
 @router.get("/", response_model=List[UserResponse])
@@ -69,7 +87,16 @@ async def get_all_users():
             gender=user_doc.get("gender", "Unknown"),
             city=user_doc.get("city", "Unknown"),
             phone=user_doc.get("phone", "Unknown"),
-            aadhar_number=user_doc.get("aadhar_number", "N/A")
+            aadhar_number=user_doc.get("aadhar_number", "N/A"),
+            emergency_contact_name=user_doc.get("emergency_contact_name"),
+            emergency_contact_phone=user_doc.get("emergency_contact_phone"),
+            blood_group=user_doc.get("blood_group"),
+            height_cm=user_doc.get("height_cm"),
+            weight_kg=user_doc.get("weight_kg"),
+            allergies=user_doc.get("allergies"),
+            chronic_conditions=user_doc.get("chronic_conditions"),
+            current_medications=user_doc.get("current_medications"),
+            past_surgeries=user_doc.get("past_surgeries")
         ))
     return result
 
@@ -91,8 +118,20 @@ async def update_user(user_id: str, user_update: UserUpdate):
         "gender": user_update.gender,
         "city": user_update.city,
         "phone": user_update.phone,
-        "aadhar_number": user_update.aadhar_number
+        "aadhar_number": user_update.aadhar_number,
+        "emergency_contact_name": user_update.emergency_contact_name,
+        "emergency_contact_phone": user_update.emergency_contact_phone,
+        "blood_group": user_update.blood_group,
+        "height_cm": user_update.height_cm,
+        "weight_kg": user_update.weight_kg,
+        "allergies": user_update.allergies,
+        "chronic_conditions": user_update.chronic_conditions,
+        "current_medications": user_update.current_medications,
+        "past_surgeries": user_update.past_surgeries
     }
+    
+    # Remove None values so we don't overwrite with null unless intended (basic implementation)
+    update_data = {k: v for k, v in update_data.items() if v is not None}
     
     result = await db.users.update_one(
         {"_id": obj_id},
@@ -112,7 +151,16 @@ async def update_user(user_id: str, user_update: UserUpdate):
         gender=updated_user.get("gender", "Unknown"),
         city=updated_user.get("city", "Unknown"),
         phone=updated_user.get("phone", "Unknown"),
-        aadhar_number=updated_user.get("aadhar_number", "N/A")
+        aadhar_number=updated_user.get("aadhar_number", "N/A"),
+        emergency_contact_name=updated_user.get("emergency_contact_name"),
+        emergency_contact_phone=updated_user.get("emergency_contact_phone"),
+        blood_group=updated_user.get("blood_group"),
+        height_cm=updated_user.get("height_cm"),
+        weight_kg=updated_user.get("weight_kg"),
+        allergies=updated_user.get("allergies"),
+        chronic_conditions=updated_user.get("chronic_conditions"),
+        current_medications=updated_user.get("current_medications"),
+        past_surgeries=updated_user.get("past_surgeries")
     )
 
 @router.delete("/{user_id}")

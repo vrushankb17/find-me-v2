@@ -44,7 +44,7 @@ const LiveTicker = () => {
                                 {scan.status === "match" ? <UserCheck size={18} /> : <ScanFace size={18} />}
                             </div>
                             <div className="ticker-info">
-                                <div className="ticker-name" style={{ color: scan.status === "match" ? "#34d399" : "#fff" }}>
+                                <div className="ticker-name" style={{ color: scan.status === "match" ? "#059669" : "#1f2937" }}>
                                     {scan.status === "match" ? `Match: ${scan.name}` : "Scanning Sector..."}
                                 </div>
                                 <div className="ticker-meta">{scan.sector} • {scan.time}</div>

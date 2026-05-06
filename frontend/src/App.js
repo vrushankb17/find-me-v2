@@ -378,10 +378,10 @@ function App() {
                               <stop offset="95%" stopColor="#06b6d4" stopOpacity={1}/>
                             </linearGradient>
                           </defs>
-                          <text x="50%" y="45%" textAnchor="middle" dominantBaseline="middle" fill="#fff" fontSize="24" fontWeight="bold">
+                          <text x="50%" y="45%" textAnchor="middle" dominantBaseline="middle" fill="#1f2937" fontSize="24" fontWeight="bold">
                             1,770
                           </text>
-                          <text x="50%" y="58%" textAnchor="middle" dominantBaseline="middle" fill="#888" fontSize="12">
+                          <text x="50%" y="58%" textAnchor="middle" dominantBaseline="middle" fill="#ea580c" fontSize="12">
                             Total Cases
                           </text>
                           <Pie
@@ -398,7 +398,7 @@ function App() {
                             <Cell key={`cell-0`} fill="url(#colorLost)" />
                             <Cell key={`cell-1`} fill="url(#colorFound)" />
                           </Pie>
-                          <Tooltip contentStyle={{ backgroundColor: '#111', border: '1px solid #333', borderRadius: '8px' }} itemStyle={{ color: '#fff' }} />
+                          <Tooltip contentStyle={{ backgroundColor: '#fff7ed', border: '1px solid #fed7aa', borderRadius: '8px' }} itemStyle={{ color: '#1f2937' }} />
                         </PieChart>
                       </ResponsiveContainer>
                       <div className="chart-label">Status Distribution</div>
@@ -417,9 +417,9 @@ function App() {
                               <stop offset="95%" stopColor="#06b6d4" stopOpacity={1}/>
                             </linearGradient>
                           </defs>
-                          <XAxis dataKey="name" tick={{fontSize: 10, fill: '#888'}} axisLine={false} tickLine={false} />
-                          <YAxis tick={{fontSize: 10, fill: '#888'}} axisLine={false} tickLine={false} />
-                          <Tooltip cursor={{fill: '#222'}} contentStyle={{ backgroundColor: '#111', border: '1px solid #333', borderRadius: '8px' }} />
+                          <XAxis dataKey="name" tick={{fontSize: 10, fill: '#ea580c'}} axisLine={false} tickLine={false} />
+                          <YAxis tick={{fontSize: 10, fill: '#ea580c'}} axisLine={false} tickLine={false} />
+                          <Tooltip cursor={{fill: '#ffedd5'}} contentStyle={{ backgroundColor: '#fff7ed', border: '1px solid #fed7aa', borderRadius: '8px' }} itemStyle={{ color: '#1f2937' }} />
                           <Bar dataKey="lost" fill="url(#barColorLost)" radius={[5, 5, 0, 0]} barSize={12} />
                           <Bar dataKey="found" fill="url(#barColorFound)" radius={[5, 5, 0, 0]} barSize={12} />
                         </BarChart>

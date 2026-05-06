@@ -30,7 +30,7 @@
 
 .weather-widget.container {
     position: relative;
-    background: linear-gradient(to bottom right, #38bdf8, #3b82f6, #4f46e5);
+    background: linear-gradient(to bottom right, #fcd34d, #fb923c, #ea580c);
     border-radius: 24px;
     padding: 24px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
@@ -121,7 +121,7 @@
 }
 
 .temp-icon-wrapper {
-    background: linear-gradient(to bottom right, #fb923c, #ef4444);
+    background: linear-gradient(to bottom right, #fca5a5, #ef4444);
     padding: 16px;
     border-radius: 16px;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
