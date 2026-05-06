@@ -8,15 +8,29 @@ FindMe is a full-stack application built for large-scale events like Kumbh Mela,
 
 ## 🧱 Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Frontend | React.js |
-| Backend | FastAPI (Python) |
-| Database | MongoDB (local) |
-| Face Detection | DeepFace / OpenCV |
-| Styling | Vanilla CSS + Framer Motion |
+### 🎨 Frontend (React Application)
+*   **Core Framework:** React.js (v19)
+*   **Data Visualization & Charts:** Recharts
+*   **Map Integration:** React Simple Maps
+*   **Webcam Interface:** React Webcam
+*   **Animations:** Framer Motion
+*   **Icons:** Lucide React
+*   **API Client:** Axios
+*   **Styling:** Vanilla CSS
+
+### ⚙️ Backend (Python API)
+*   **Web Framework:** FastAPI
+*   **ASGI Server:** Uvicorn
+*   **Data Validation:** Pydantic
+*   **Image Processing:** OpenCV-Python, Numpy
+*   **Database Drivers:** Motor (async), PyMongo
+*   **File Handling:** Python-Multipart
+
+### 🗄️ Database
+*   **Database:** MongoDB (local)
 
 ---
+
 
 ## 📁 Project Structure
 
